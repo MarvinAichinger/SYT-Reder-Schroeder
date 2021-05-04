@@ -1,0 +1,5 @@
+sudo apt install net-tools
+ifconfig
+sudo reboot
+
+http://192.168.1.121/phpmyadmin/
