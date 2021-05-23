@@ -9,10 +9,10 @@ services:
       MYSQL_PASSWORD: my-secret-pw
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_DATABASE: webdb
-    ports:
-      - 3316:3306
     volumes:
-      - my-data-volume:/var/lib/mysql 
+      - my-data-volume:/var/lib/mysql
+    networks:
+      - backend
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: dev_pma
@@ -21,9 +21,20 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      PMA_ARBITRARY: 0
+      PMA_ARBITRARY: 1
     restart: always
     ports:
       - 8183:80
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.2.0.0/16
+
 volumes:
   my-data-volume:

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+    chat-service:
+        image: my-chat-server
+        build:
+            context: .
+        ports:
+            - 9090:9001
