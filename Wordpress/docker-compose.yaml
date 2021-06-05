@@ -1,0 +1,26 @@
+version: '3.8'
+
+services: 
+    wordpress:
+        image: wordpress
+        ports: 
+            - "4000:80"
+        environment:
+            WORDPRESS_DB_HOST: mysql
+            WORDPRESS_DB_USER: user
+            WORDPRESS_DB_PASSWORD: my-secret-pw
+            WORDPRESS_DB_NAME: db
+        volumes:
+            - wordpress-volume:/var/www/html
+    mysql:
+        image: mysql
+        environment:
+            MYSQL_DATABASE: db
+            MYSQL_USER: user
+            MYSQL_PASSWORD: my-secret-pw
+            MYSQL_ROOT_PASSWORD: my-secret-pw
+        volumes:
+            - mysql-volume:/var/lib/mysql
+volumes:
+    wordpress-volume:
+    mysql-volume:
